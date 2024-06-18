@@ -155,7 +155,9 @@
                 <div class="modal-dialog modal-lg modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header" style="background-color: #242424;">
-                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <!--<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>-->
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" aria-expanded="false" aria-controls="main-nav"></button>
+
                         </div>
                         <div class="modal-body text-center">
                             <img src="" alt="" class="img-fluid modal-image">
@@ -266,9 +268,9 @@
 
 
     
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
-    <script src="../public/js/index.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js" defer></script>
+    <script src="../public/js/index.js" defer></script>
     <script>
      document.addEventListener('DOMContentLoaded', function () {
     const images = document.querySelectorAll('.container .column-gallery img');
