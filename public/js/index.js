@@ -52,3 +52,35 @@ window.addEventListener('scroll', () => {
     }
 });
 
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  const images = [
+    '/public/images/b1.jpg', '/public/images/b2.jpg', 
+    '/public/images/b3.jpg', '/public/images/b4.jpg',
+    '/public/images/b5.jpg', '/public/images/b6.jpg', 
+    '/public/images/b7.jpg', '/public/images/b8.jpg',
+    '/public/images/b9.jpg', '/public/images/b10.jpg', 
+  ];
+
+  const container = document.getElementById('carouselItemsContainer');
+  let html = '';
+  let rowContent = '';
+
+  images.forEach((src, index) => {
+    rowContent += `
+      <div class="col-md-3">
+        <img src="${src}" class="img-fluid" alt="Image ${index + 1}">
+      </div>
+    `;
+
+    // Every 4 images or at the end of the array, wrap the content into a carousel-item
+    if ((index + 1) % 4 === 0 || index === images.length - 1) {
+      let itemClass = index < 4 ? 'carousel-item active' : 'carousel-item';
+      html += `<div class="${itemClass}"><div class="row justify-content-center">${rowContent}</div></div>`;
+      rowContent = ''; // Reset for the next set of images
+    }
+  });
+
+  container.innerHTML = html;
+});
