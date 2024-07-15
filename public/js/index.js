@@ -361,3 +361,15 @@ document.addEventListener('lazyloaded', function(e) {
 });
 
 */
+
+
+
+document.getElementById('addProductBtn').addEventListener('click', function() {
+    document.getElementById('main-content').classList.add('hidden');
+    document.getElementById('productForm').classList.remove('hidden');
+});
+
+document.getElementById('backBtn').addEventListener('click', function() {
+    document.getElementById('productForm').classList.add('hidden');
+    document.getElementById('main-content').classList.remove('hidden');
+});
