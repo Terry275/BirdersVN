@@ -453,8 +453,8 @@ p {
   color: #212121;
 }
 
-#sidebar-side .nav a {
-  background: none;
+#sidebar-side .nav a, #addCatBtn{
+  /*background: none;*/
   border-bottom: 1px solid #fff;
   color: #000;
   font-size: 14px;
@@ -587,20 +587,11 @@ h2 {
 .order-page-content:target {
   display: block;
 }
-/* Moving to edit form */
-.edit-form-page-content {
-  display: none;
+
+#backBtn strong {
+  font-size: 18px;
 }
-.edit-form-page-content:target {
-  display: block;
-}
-/* Moving to Messages page */
-.message-page-content {
-  display: none;
-}
-.message-page-content:target{
-  display: block;
-}
+
 
 
 
