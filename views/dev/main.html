@@ -182,7 +182,23 @@
                                 <a href="#" class="nav-link">
                                 Huỳnh Nguyễn Thiên Minh
                                 </a>
-                            
+                        </div>
+                    </ul>
+
+                    <ul class="nav flex-column" id="mews">
+                        <h3 class=sidebar-title> Bài viết</h3>
+                        <button id="addNewsBtn" type="button" class="btn btn-info">Thêm bài viết</button>
+                        <div class="scrollable-category" style="display: block !important;">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                aaaaaaaaaaaa
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                aaaaaaaaaaaa
+                                </a>
+                            </li>
                         </div>
                     </ul>
                 </div>
@@ -523,7 +539,7 @@
                 </div>
                 
 
-                    <!-- Form to add product start-->
+                    <!-- Form to add image start-->
                 <div id="productForm" class=" hidden container-fluid rounded-page form-page-content">                
                     <div class="container d-flex justify-content-between form-container">
                         <form action="" class="d-flex flex-column">
@@ -561,7 +577,7 @@
                         </form>
                     </div>
                 </div>
-                <!-- Form to add product end-->
+                <!-- Form to add image end-->
 
 
 
@@ -599,6 +615,34 @@
                     </div>
                 </div>
                 <!-- Form to add category end-->
+
+                <!-- Form to add article start-->
+                <div id="newsForm" class=" hidden container-fluid rounded-page form-page-content">                
+                    <div class="container d-flex justify-content-between form-container">
+                        <form action="" class="d-flex flex-column">
+                            <h2 class="text-secondary">Thêm Bài Viết</h2>
+                            <br>
+                            <label class="fs-4 mb-2" for="name">Tên bài viết</label>
+                            <input  class = "form-input" type="text" name='Name' id="name" required>
+                            <br>
+                            <label class="fs-4 mb-2" for="article">URL</label>
+                            <input  class = "form-input" type="text" name='link' id="url" required>
+                            <br>
+                            <div class="d-flex justify-content-between">
+                                <button class="form-btn" type="submit"><a href="#product-page" class="text-decoration-none">Upload</a></button>
+                                <button class="reset-form-btn" type="reset">Reset</button>
+                            </div>
+                            <a href="#top" id="backBtnNews" class="nav-link text-black fs-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0z"/>
+                                    <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z"/>
+                                  </svg>
+                                <strong>Quay lại trang chủ</strong>
+                            </a>
+                        </form>
+                    </div>
+                </div>
+                <!-- Form to add article end-->
 
 
 
@@ -718,6 +762,17 @@
     document.getElementById('main-content').classList.remove('hidden');
 });
      </script>
+     <script>
+        document.getElementById('addNewsBtn').addEventListener('click', function() {
+        document.getElementById('main-content').classList.add('hidden');
+        document.getElementById('newsForm').classList.remove('hidden');
+    });
+    
+        document.getElementById('backBtnNews').addEventListener('click', function() {
+        document.getElementById('newsForm').classList.add('hidden');
+        document.getElementById('main-content').classList.remove('hidden');
+    });
+         </script>
   
   </body>
 </html>

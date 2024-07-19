@@ -1,0 +1,23 @@
+{
+  "name": "huynhthanhdanh",
+  "version": "18.16.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Terry275/BirdersVN.git"
+  },
+  "author": "Terry275",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Terry275/BirdersVN/issues"
+  },
+  "homepage": "https://github.com/Terry275/BirdersVN#readme",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.19.2"
+  }
+}
