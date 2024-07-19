@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const photoSchema = new mongoose.Schema({
   title: String,
   alttitle: String,
-  imageUrl: String,
+  imageBase64: String, // Store the image as a Base64 string
   category: String,
   subCategory: String
 });

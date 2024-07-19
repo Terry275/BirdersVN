@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-    <%- include('partials/head', { title: 'Trang chủ' }) %>
+    <%- include('partials/head', { title: 'Thư viện ảnh' }) %>
   <body>
     <%- include('partials/header') %>
     <div class=" ">
@@ -10,461 +10,58 @@
         <div class="content-flex-flex">
 
             <div id="viewport-side">
-          
                 <div id="sidebar-side" class="scrollarea">
                 
-                    <ul class="nav flex-column" >
-                        <h3 class=sidebar-title> Chim Việt Nam</h3>
-                        <div class="scrollable-category" style="display: block !important;">
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                Chim Hà Nội
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                Chim Đà Lạt
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                Xứ miền tây
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                Phú Quốc
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                Cần Thơ
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                Long An
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                Vịnh Hạ Long
-                                </a>
-                            </li>
-                        </div>
-                    </ul>
+                    <% categories.forEach(category => { %>
+                        <ul class="nav flex-column">
+                            <h3 class="sidebar-title"><%= category._id %></h3>
+                            <div class="scrollable-category" style="display: block !important;">
+                                <% category.subCategories.forEach(subCategory => { %>
+                                    <li class="nav-item">
+                                        <a href="/gallery?category=<%= category._id %>&subCategory=<%= subCategory %>" class="nav-link">
+                                            <%= subCategory %>
+                                        </a>
+                                    </li>
+                                <% }) %>
+                            </div>
+                        </ul>
+                    <% }) %>
 
-                    <ul class="nav flex-column" >
-                        <h3 class=sidebar-title> Chim Thế Giới</h3>
-                        <div class="scrollable-category" style="display: block !important;">
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                Đài Loan
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                Venezuela
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                Ecuador
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                Úc
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                Nhật
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                Nga
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                Thái
-                                </a>
-                            </li>
-                        </div>
-                    </ul>
 
-                    <ul class="nav flex-column" >
-                        <h3 class=sidebar-title> Ảnh đẹp của bạn bè</h3>
-                        <div class="scrollable-category" style="display: block !important;">
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                Ảnh Facebook  BIRDERS VIỆT NAM
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                Bùi Trọng Hiếu
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                Đặng Ngọc Sâm Thương
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                Huỳnh Nguyễn Thiên Minh
-                                </a>
-                        </div>
-                    </ul>
-
-                    <ul class="nav flex-column" id="mews">
-                        <h3 class=sidebar-title> Bài viết</h3>
-                        <div class="scrollable-category" style="display: block !important;">
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                aaaaaaaaaaaa
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                aaaaaaaaaaaa
-                                </a>
-                            </li>
-                        </div>
-                    </ul>
+                        <!-- Articles Section -->
+                        <ul class="nav flex-column" id="mews">
+                            <h3 class="sidebar-title">Bài viết</h3>
+                            <div class="scrollable-category" style="display: block !important;">
+                                <% articles.forEach(article => { %>
+                                    <li class="nav-item">
+                                        <a href="<%= article.url %>" class="nav-link" target="_blank">
+                                            <%= article.title %>
+                                        </a>
+                                    </li>
+                                <% }) %>
+                            </div>
+                        </ul>
                 </div>
             </div>
             <div class="container" id="top">
-                <!--<hr class="solid">-->
-
                 <div class="row row-category">
-
-                    <div class="full-link">
-                        <h2 id="" class="title-custom">Thư Viện Ảnh</h2>
-                        <div class="full-link-bd">
-                            <a href="#">
-                                <p>Xem tất cả
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
-                                        <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
-                                    </svg>
-                                </p>
-                            </a>
-                        </div>
-                    </div>
-
+                    <h2><%= category %> <%= subCategory ? '- ' + subCategory : '' %></h2> <!-- Display the selected category and sub-category -->
                     <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4 column-gallery-main" data-masonry='{"percentPosition": true }'>
-                       
-                        <div class="column-main">                   
-                            <img src="../public/images/b1.jpg" alt="" class="img-fluid">  
-                            <div class="name d-none">
-                                <h3>Bird 3</h3>
-                                <h4>A bird</h4>
-                            </div>                                                  
-                        </div>
-
-
-                        <div class="column-main">                   
-                            <img src="../public/images/b1.jpg" alt="" class="img-fluid">  
-                            <div class="name d-none">
-                                <h3>Bird 3</h3>
-                                <h4>A bird</h4>
-                            </div>                                                  
-                        </div>
-                        <div class="column-main">                   
-                            <img src="../public/images/b1.jpg" alt="" class="img-fluid">  
-                            <div class="name d-none">
-                                <h3>Bird 3</h3>
-                                <h4>A bird</h4>
-                            </div>                                                  
-                        </div>
-                        <div class="column-main">                   
-                            <img src="../public/images/b2.jpg" alt="" class="img-fluid">  
-                            <div class="name d-none">
-                                <h3>Bird 3</h3>
-                                <h4>A bird</h4>
-                            </div>                                                  
-                        </div>
-                        <div class="column-main">                   
-                            <img src="../public/images/b1.jpg" alt="" class="img-fluid">  
-                            <div class="name d-none">
-                                <h3>Bird 3</h3>
-                                <h4>A bird</h4>
-                            </div>                                                  
-                        </div>
-                        <div class="column-main">                   
-                            <img src="../public/images/b1.jpg" alt="" class="img-fluid">  
-                            <div class="name d-none">
-                                <h3>Bird 3</h3>
-                                <h4>A bird</h4>
-                            </div>                                                  
-                        </div>
-                        <div class="column-main">                   
-                            <img src="../public/images/b3.jpg" alt="" class="img-fluid">  
-                            <div class="name d-none">
-                                <h3>Bird 3</h3>
-                                <h4>A bird</h4>
-                            </div>                                                  
-                        </div>
-                        <div class="column-main">                   
-                            <img src="../public/images/b1.jpg" alt="" class="img-fluid">  
-                            <div class="name d-none">
-                                <h3>Bird 3</h3>
-                                <h4>A bird</h4>
-                            </div>                                                  
-                        </div>
-                        <div class="column-main">                   
-                            <img src="../public/images/b3.jpg" alt="" class="img-fluid">  
-                            <div class="name d-none">
-                                <h3>Bird 3</h3>
-                                <h4>A bird</h4>
-                            </div>                                                  
-                        </div>
-                        <div class="column-main">                   
-                            <img src="../public/images/b1.jpg" alt="" class="img-fluid">  
-                            <div class="name d-none">
-                                <h3>Bird 3</h3>
-                                <h4>A bird</h4>
-                            </div>                                                  
-                        </div>
-                        <div class="column-main">                   
-                            <img src="../public/images/b1.jpg" alt="" class="img-fluid">  
-                            <div class="name d-none">
-                                <h3>Bird 3</h3>
-                                <h4>A bird</h4>
-                            </div>                                                  
-                        </div>
-                        <div class="column-main">                   
-                            <img src="../public/images/b3.jpg" alt="" class="img-fluid">  
-                            <div class="name d-none">
-                                <h3>Bird 3</h3>
-                                <h4>A bird</h4>
-                            </div>                                                  
-                        </div>
+                        <!-- Loop through photos passed from the route -->
+                        <% photos.forEach(photo => { %>
+                            <div class="column-main">
+                                <img src="data:image/jpeg;base64,<%= photo.imageBase64 %>" alt="" class="img-fluid">
+                                <div class="name d-none">
+                                    <h3><%= photo.title %></h3>
+                                    <h4><%= photo.alttitle %></h4>
+                                </div>
+                            </div>
+                        <% }) %>
                     </div>
                 </div>
-
-                
-                <div class="row row-category">
-                    <div class="full-link">
-                        <h2 id="" class="title-custom">Chim Việt Nam</h2>
-                        <div class="full-link-bd">
-                            <a href="#">
-                                <p>Xem tất cả
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
-                                        <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
-                                    </svg>
-                                </p>
-                            </a>
-                        </div>
-                    </div>
-                    
-                   
-
-                    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4 column-gallery-main" data-masonry='{"percentPosition": true }'>
-                       
-                        <div class="column-main">                   
-                            <img src="../public/images/b1.jpg" alt="" class="img-fluid">  
-                            <div class="name d-none">
-                                <h3>Bird 3</h3>
-                                <h4>A bird</h4>
-                            </div>                                                  
-                        </div>
-
-
-                        <div class="column-main">                   
-                            <img src="../public/images/b1.jpg" alt="" class="img-fluid">  
-                            <div class="name d-none">
-                                <h3>Bird 3</h3>
-                                <h4>A bird</h4>
-                            </div>                                                  
-                        </div>
-                        <div class="column-main">                   
-                            <img src="../public/images/b1.jpg" alt="" class="img-fluid">  
-                            <div class="name d-none">
-                                <h3>Bird 3</h3>
-                                <h4>A bird</h4>
-                            </div>                                                  
-                        </div>
-                        <div class="column-main">                   
-                            <img src="../public/images/b2.jpg" alt="" class="img-fluid">  
-                            <div class="name d-none">
-                                <h3>Bird 3</h3>
-                                <h4>A bird</h4>
-                            </div>                                                  
-                        </div>
-                        <div class="column-main">                   
-                            <img src="../public/images/b1.jpg" alt="" class="img-fluid">  
-                            <div class="name d-none">
-                                <h3>Bird 3</h3>
-                                <h4>A bird</h4>
-                            </div>                                                  
-                        </div>
-                        <div class="column-main">                   
-                            <img src="../public/images/b1.jpg" alt="" class="img-fluid">  
-                            <div class="name d-none">
-                                <h3>Bird 3</h3>
-                                <h4>A bird</h4>
-                            </div>                                                  
-                        </div>
-                        <div class="column-main">                   
-                            <img src="../public/images/b3.jpg" alt="" class="img-fluid">  
-                            <div class="name d-none">
-                                <h3>Bird 3</h3>
-                                <h4>A bird</h4>
-                            </div>                                                  
-                        </div>
-                        <div class="column-main">                   
-                            <img src="../public/images/b1.jpg" alt="" class="img-fluid">  
-                            <div class="name d-none">
-                                <h3>Bird 3</h3>
-                                <h4>A bird</h4>
-                            </div>                                                  
-                        </div>
-                        <div class="column-main">                   
-                            <img src="../public/images/b3.jpg" alt="" class="img-fluid">  
-                            <div class="name d-none">
-                                <h3>Bird 3</h3>
-                                <h4>A bird</h4>
-                            </div>                                                  
-                        </div>
-                        <div class="column-main">                   
-                            <img src="../public/images/b1.jpg" alt="" class="img-fluid">  
-                            <div class="name d-none">
-                                <h3>Bird 3</h3>
-                                <h4>A bird</h4>
-                            </div>                                                  
-                        </div>
-                        <div class="column-main">                   
-                            <img src="../public/images/b1.jpg" alt="" class="img-fluid">  
-                            <div class="name d-none">
-                                <h3>Bird 3</h3>
-                                <h4>A bird</h4>
-                            </div>                                                  
-                        </div>
-                        <div class="column-main">                   
-                            <img src="../public/images/b3.jpg" alt="" class="img-fluid">  
-                            <div class="name d-none">
-                                <h3>Bird 3</h3>
-                                <h4>A bird</h4>
-                            </div>                                                  
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row row-category">
-
-                    <div class="full-link">
-                        <h2 id="" class="title-custom">Chim Thế Giới</h2>
-                        <div class="full-link-bd">
-                            <a href="#">
-                                <p>Xem tất cả
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
-                                        <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
-                                    </svg>
-                                </p>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4 column-gallery-main" data-masonry='{"percentPosition": true }'>
-                       
-                        <div class="column-main">                   
-                            <img src="../public/images/b1.jpg" alt="" class="img-fluid">  
-                            <div class="name d-none">
-                                <h3>Bird 3</h3>
-                                <h4>A bird</h4>
-                            </div>                                                  
-                        </div>
-
-
-                        <div class="column-main">                   
-                            <img src="../public/images/b1.jpg" alt="" class="img-fluid">  
-                            <div class="name d-none">
-                                <h3>Bird 3</h3>
-                                <h4>A bird</h4>
-                            </div>                                                  
-                        </div>
-                        <div class="column-main">                   
-                            <img src="../public/images/b1.jpg" alt="" class="img-fluid">  
-                            <div class="name d-none">
-                                <h3>Bird 3</h3>
-                                <h4>A bird</h4>
-                            </div>                                                  
-                        </div>
-                        <div class="column-main">                   
-                            <img src="../public/images/b2.jpg" alt="" class="img-fluid">  
-                            <div class="name d-none">
-                                <h3>Bird 3</h3>
-                                <h4>A bird</h4>
-                            </div>                                                  
-                        </div>
-                        <div class="column-main">                   
-                            <img src="../public/images/b1.jpg" alt="" class="img-fluid">  
-                            <div class="name d-none">
-                                <h3>Bird 3</h3>
-                                <h4>A bird</h4>
-                            </div>                                                  
-                        </div>
-                        <div class="column-main">                   
-                            <img src="../public/images/b1.jpg" alt="" class="img-fluid">  
-                            <div class="name d-none">
-                                <h3>Bird 3</h3>
-                                <h4>A bird</h4>
-                            </div>                                                  
-                        </div>
-                        <div class="column-main">                   
-                            <img src="../public/images/b3.jpg" alt="" class="img-fluid">  
-                            <div class="name d-none">
-                                <h3>Bird 3</h3>
-                                <h4>A bird</h4>
-                            </div>                                                  
-                        </div>
-                        <div class="column-main">                   
-                            <img src="../public/images/b1.jpg" alt="" class="img-fluid">  
-                            <div class="name d-none">
-                                <h3>Bird 3</h3>
-                                <h4>A bird</h4>
-                            </div>                                                  
-                        </div>
-                        <div class="column-main">                   
-                            <img src="../public/images/b3.jpg" alt="" class="img-fluid">  
-                            <div class="name d-none">
-                                <h3>Bird 3</h3>
-                                <h4>A bird</h4>
-                            </div>                                                  
-                        </div>
-                        <div class="column-main">                   
-                            <img src="../public/images/b1.jpg" alt="" class="img-fluid">  
-                            <div class="name d-none">
-                                <h3>Bird 3</h3>
-                                <h4>A bird</h4>
-                            </div>                                                  
-                        </div>
-                        <div class="column-main">                   
-                            <img src="../public/images/b1.jpg" alt="" class="img-fluid">  
-                            <div class="name d-none">
-                                <h3>Bird 3</h3>
-                                <h4>A bird</h4>
-                            </div>                                                  
-                        </div>
-                        <div class="column-main">                   
-                            <img src="../public/images/b3.jpg" alt="" class="img-fluid">  
-                            <div class="name d-none">
-                                <h3>Bird 3</h3>
-                                <h4>A bird</h4>
-                            </div>                                                  
-                        </div>
-                    </div>
-                </div>
-
-
-            </div>        
+            </div>
+            
+            
         </div>
         <!-- Modal -->
         <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
@@ -487,13 +84,7 @@
           </div>
         </section>
             <!--FOOTER-->
-            <footer class="bg-dark text-center text-light">
-            <!-- Copyright -->
-            <div class="text-center p-3" style="background-color: rgba(255, 255, 255, 0.2);">
-                © Copyright Huynh Thanh Danh 2024. All rights reserved
-            </div>
-            <!-- Copyright -->
-            </footer>
+            <%- include('partials/footer') %>
         </main>
     </div>
 
