@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-    <%- include('partials/head', { title: 'Trang chủ' }) %>
+    <%- include('../partials/head', { title: 'Trang chủ' }) %>
   <body>
     
-    <%- include('partials/header') %>
+    <%- include('../partials/header') %>
     <div class=" ">
         
         <main>
@@ -17,10 +17,8 @@
         <div class="content-flex-flex">
             
              <div id="viewport-side">
-
                 <div id="sidebar-side" class="scrollarea">
                     <button id="addCatBtn" type="button" class="btn btn-info">Thêm danh mục</button>
-           
                     <% categories.forEach(category => { %>
                         <ul class="nav flex-column">
                             <h3 class="sidebar-title"><%= category._id %></h3>
@@ -35,7 +33,7 @@
                             </div>
                         </ul>
                     <% }) %>
-
+                
                     <!-- Articles Section -->
                     <ul class="nav flex-column" id="mews">
                         <h3 class="sidebar-title">Bài viết</h3>
@@ -51,6 +49,8 @@
                         </div>
                     </ul>
                 </div>
+                
+                
             </div>
             <div class="container home-page-content" id="top">
                 <div id="main-content">
@@ -159,26 +159,32 @@
 
         <div id="catForm" class="hidden container-fluid rounded-page form-page-content">
             <div class="container d-flex justify-content-between form-container">
-                <form action="/add-category" method="POST" class="d-flex flex-column">
-                    <h2 class="text-secondary">Thêm danh mục</h2>
-                    <label class="fs-4 mb-2" for="category">Category</label>
-                    <input class="form-input" type="text" name="category" id="category" required>
-                    <label class="fs-4 mb-2" for="subCategory">Sub-Category</label>
-                    <input class="form-input" type="text" name="subCategory" id="subCategory" required>
-                    <div class="d-flex justify-content-between">
-                        <button class="form-btn" type="submit">Upload</button>
-                        <button class="reset-form-btn" type="reset">Reset</button>
-                    </div>
-                    <a href="#top" id="backBtnCat" class="nav-link text-black fs-6">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1-5 12.5v-2a.5.5 0 0 1-1 0z"/>
-                            <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z"/>
-                        </svg>
-                        <strong>Quay lại trang chủ</strong>
-                    </a>
-                </form>
+              <form action="/add-category" method="POST" class="d-flex flex-column">
+                <h2 class="text-secondary">Thêm danh mục</h2>
+                <label class="fs-4 mb-2" for="category-select">Category</label>
+                <select class="form-input" name="category" id="category-select" required>
+                  <option value="">Select Category</option>
+                  <% categories.forEach(category => { %>
+                    <option value="<%= category._id %>"><%= category._id %></option>
+                  <% }) %>
+                </select>
+                <label class="fs-4 mb-2" for="subCategory">Sub-Category</label>
+                <input class="form-input" type="text" name="subCategory" id="subCategory" required>
+                <div class="d-flex justify-content-between">
+                  <button class="form-btn" type="submit">Upload</button>
+                  <button class="reset-form-btn" type="reset">Reset</button>
+                </div>
+                <a href="#top" id="backBtnCat" class="nav-link text-black fs-6">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1-5 12.5v-2a.5.5 0 0 1-1 0z"/>
+                    <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z"/>
+                  </svg>
+                  <strong>Quay lại trang chủ</strong>
+                </a>
+              </form>
             </div>
-        </div>
+          </div>
+          
 
         <div id="newsForm" class="hidden container-fluid rounded-page form-page-content">
             <div class="container d-flex justify-content-between form-container">
@@ -234,7 +240,7 @@
           </div>
         </section>
        <!--FOOTER-->
-       <%- include('partials/footer') %>
+       <%- include('../partials/footer') %>
         </main>
     </div>
 
@@ -248,7 +254,7 @@
     ></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
-    <script src="../public/js/index.js"></script>
+    <script src="/js/index.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
        const images = document.querySelectorAll('.container .column-main img');

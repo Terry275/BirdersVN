@@ -4,9 +4,11 @@ const mongoose = require('mongoose');
 const photoSchema = new mongoose.Schema({
   title: String,
   alttitle: String,
-  imageBase64: String, // Store the image as a Base64 string
+  imageBase64: String,
   category: String,
-  subCategory: String
+  subCategory: [String] // Make this an array
 });
 
-module.exports = mongoose.model('Photo', photoSchema);
+const Photo = mongoose.model('Photo', photoSchema);
+
+module.exports = Photo;

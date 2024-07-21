@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-    <%- include('partials/head', { title: 'Thư viện ảnh' }) %>
+    <%- include('partials/head', { title: 'Trang chủ' }) %>
   <body>
     <%- include('partials/header') %>
     <div class=" ">
@@ -11,7 +11,6 @@
 
             <div id="viewport-side">
                 <div id="sidebar-side" class="scrollarea">
-                
                     <% categories.forEach(category => { %>
                         <ul class="nav flex-column">
                             <h3 class="sidebar-title"><%= category._id %></h3>
@@ -26,40 +25,44 @@
                             </div>
                         </ul>
                     <% }) %>
-
-
-                        <!-- Articles Section -->
-                        <ul class="nav flex-column" id="mews">
-                            <h3 class="sidebar-title">Bài viết</h3>
-                            <div class="scrollable-category" style="display: block !important;">
-                                <% articles.forEach(article => { %>
-                                    <li class="nav-item">
-                                        <a href="<%= article.url %>" class="nav-link" target="_blank">
-                                            <%= article.title %>
-                                        </a>
-                                    </li>
-                                <% }) %>
-                            </div>
-                        </ul>
+                
+                    <!-- Articles Section -->
+                    <ul class="nav flex-column" id="mews">
+                        <h3 class="sidebar-title">Bài viết</h3>                       
+                        <div class="scrollable-category" style="display: block !important;">
+                            <% articles.forEach(article => { %>
+                                <li class="nav-item">
+                                    <a href="<%= article.url %>" class="nav-link" target="_blank">
+                                        <%= article.title %>
+                                    </a>
+                                </li>
+                            <% }) %>
+                        </div>
+                    </ul>
                 </div>
+                
             </div>
             <div class="container" id="top">
                 <div class="row row-category">
+                  <h2>All Photos</h2> <!-- Default heading if no category/subcategory -->
+                  <% if (category) { %>
                     <h2><%= category %> <%= subCategory ? '- ' + subCategory : '' %></h2> <!-- Display the selected category and sub-category -->
-                    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4 column-gallery-main" data-masonry='{"percentPosition": true }'>
-                        <!-- Loop through photos passed from the route -->
-                        <% photos.forEach(photo => { %>
-                            <div class="column-main">
-                                <img src="data:image/jpeg;base64,<%= photo.imageBase64 %>" alt="" class="img-fluid">
-                                <div class="name d-none">
-                                    <h3><%= photo.title %></h3>
-                                    <h4><%= photo.alttitle %></h4>
-                                </div>
-                            </div>
-                        <% }) %>
-                    </div>
+                  <% } %>
+                  <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4 column-gallery-main" data-masonry='{"percentPosition": true }'>
+                    <!-- Loop through photos passed from the route -->
+                    <% photosAll.forEach(photo => { %>
+                      <div class="column-main">
+                        <img src="data:image/jpeg;base64,<%= photo.imageBase64 %>" alt="" class="img-fluid">
+                        <div class="name d-none">
+                          <h3><%= photo.title %></h3>
+                          <h4><%= photo.alttitle %></h4>
+                        </div>
+                      </div>
+                    <% }) %>
+                  </div>
                 </div>
-            </div>
+              </div>
+              
             
             
         </div>
@@ -98,7 +101,7 @@
     ></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
-    <script src="../public/js/index.js"></script>
+    <script src="/js/index.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
        const images = document.querySelectorAll('.container .column-main img');

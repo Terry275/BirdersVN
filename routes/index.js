@@ -1,10 +1,8 @@
-// routes/index.js
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const Photo = require('../models/photo');
-const fs = require('fs');
-const Article = require('../models/article'); 
+const Article = require('../models/article');
 
 // Multer setup for handling file uploads
 const storage = multer.memoryStorage();
@@ -13,25 +11,25 @@ const upload = multer({ storage: storage });
 // Home route
 router.get('/', async (req, res) => {
   try {
-    // Fetch distinct categories and sub-categories
     const categories = await Photo.aggregate([
-      {
-        $group: {
-          _id: '$category',
-          subCategories: { $addToSet: '$subCategory' }
-        }
-      }
+      { $group: { _id: '$category', subCategories: { $addToSet: '$subCategory' } } }
     ]);
 
-    // Fetch a few example photos for each category
     const photosVietnam = await Photo.find({ category: 'Chim Việt Nam' }).limit(12);
     const photosWorld = await Photo.find({ category: 'Chim Thế Giới' }).limit(12);
-    const photosAll = await Photo.find().limit(12); // General photo gallery
+    const photosAll = await Photo.find().limit(12);
 
-    // Fetch articles for the sidebar
     const articles = await Article.find();
 
-    res.render('index', { categories, photosVietnam, photosWorld, photosAll, articles });
+    res.render('index', { 
+      categories, 
+      photosVietnam, 
+      photosWorld, 
+      photosAll, 
+      articles, 
+      category: null,  // Add category as null or any default value
+      subCategory: null  // Add subCategory as null or any default value
+    });
   } catch (err) {
     res.status(500).send(err.message);
   }
@@ -57,11 +55,11 @@ router.get('/gallery', async (req, res) => {
 });
 
 
+
 // About route
 router.get('/about', (req, res) => {
   res.render('about');
 });
-
 
 // Dev route
 router.get('/dev', async (req, res) => {
@@ -69,34 +67,37 @@ router.get('/dev', async (req, res) => {
     const categories = await Photo.aggregate([
       { $group: { _id: '$category', subCategories: { $addToSet: '$subCategory' } } }
     ]);
+    const articles = await Article.find();
+    const photosAll = await Photo.find().limit(12); // Fetch photos for demonstration
 
-    res.render('dev/main', { categories });
+    res.render('dev/main', { categories, articles, photosAll });
   } catch (err) {
-    res.status(500).send(err.message);
+    console.error('Error fetching dev data:', err.message);
+    res.status(500).render('error', { message: err.message });
   }
 });
 
-app.get('/admin', async (req, res) => {
-  const categories = await Category.find().exec();
-  const articles = await Article.find().exec();
-  res.render('dev/main', { categories, articles });
-});
 
+// routes/index.js
 
-// Route to handle adding a category
 router.post('/add-category', async (req, res) => {
   try {
     const { category, subCategory } = req.body;
 
-    const existingCategory = await Photo.aggregate([
-      { $match: { category: category } },
-      { $group: { _id: '$category', subCategories: { $addToSet: '$subCategory' } } }
-    ]);
+    // Check if the category already exists
+    const existingCategory = await Photo.findOne({ category });
 
-    if (existingCategory.length > 0) {
-      await Photo.updateMany({ category: category }, { $addToSet: { subCategory: subCategory } });
+    if (existingCategory) {
+      // Ensure subCategory is always an array
+      if (!Array.isArray(existingCategory.subCategory)) {
+        existingCategory.subCategory = [existingCategory.subCategory];
+      }
+      if (!existingCategory.subCategory.includes(subCategory)) {
+        existingCategory.subCategory.push(subCategory);
+      }
+      await existingCategory.save();
     } else {
-      await new Photo({ category: category, subCategory: subCategory }).save();
+      await new Photo({ category, subCategory: [subCategory] }).save();
     }
 
     res.redirect('/dev');
@@ -104,6 +105,8 @@ router.post('/add-category', async (req, res) => {
     res.status(500).send(err.message);
   }
 });
+
+
 
 // Route to handle image uploads
 router.post('/upload-image', upload.single('image'), async (req, res) => {
@@ -142,6 +145,5 @@ router.post('/add-article', async (req, res) => {
     res.status(500).send(err.message);
   }
 });
-
 
 module.exports = router;

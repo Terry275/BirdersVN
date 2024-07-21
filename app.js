@@ -1,23 +1,29 @@
-// app.js
 const express = require('express');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
+const dotenv = require('dotenv');
+const path = require('path');
 const app = express();
-const port = process.env.PORT || 3000;
 
-require('dotenv').config();
+dotenv.config();
+
+const PORT = process.env.PORT || 3000;
+const MONGO_URI = process.env.MONGO_URI;
 
 app.set('view engine', 'ejs');
-app.use(express.static('public'));
-app.use(bodyParser.urlencoded({ extended: true }));
+app.set('views', path.join(__dirname, 'views'));
 
-// MongoDB connection
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+// Serve static files from the 'public' directory
+app.use(express.static(path.join(__dirname, 'public')));
 
-// Routes
-const indexRoutes = require('./routes/index');
-app.use('/', indexRoutes);
+app.use(express.urlencoded({ extended: true }));
 
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('Connected to MongoDB'))
+  .catch((err) => console.error('MongoDB connection error:', err));
+
+const indexRouter = require('./routes/index');
+app.use('/', indexRouter);
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
