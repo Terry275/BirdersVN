@@ -2,15 +2,17 @@
 <html lang="en">
     <%- include('partials/head', { title: 'Trang chủ' }) %>
   <body>
+    
     <%- include('partials/header') %>
     <div class=" ">
         
         <main>
-        <section id="main-content" class="content">
+        <section id="content" class="content">
         <div class="content-flex-flex">
-
-            <div id="viewport-side">
+            
+             <div id="viewport-side">
                 <div id="sidebar-side" class="scrollarea">
+              
                     <% categories.forEach(category => { %>
                         <ul class="nav flex-column">
                             <h3 class="sidebar-title"><%= category._id %></h3>
@@ -28,7 +30,8 @@
                 
                     <!-- Articles Section -->
                     <ul class="nav flex-column" id="mews">
-                        <h3 class="sidebar-title">Bài viết</h3>                       
+                        <h3 class="sidebar-title">Bài viết</h3>
+                  
                         <div class="scrollable-category" style="display: block !important;">
                             <% articles.forEach(article => { %>
                                 <li class="nav-item">
@@ -41,30 +44,75 @@
                     </ul>
                 </div>
                 
+                
             </div>
-            <div class="container" id="top">
-                <div class="row row-category">
-                  <h2>All Photos</h2> <!-- Default heading if no category/subcategory -->
-                  <% if (category) { %>
-                    <h2><%= category %> <%= subCategory ? '- ' + subCategory : '' %></h2> <!-- Display the selected category and sub-category -->
-                  <% } %>
-                  <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4 column-gallery-main" data-masonry='{"percentPosition": true }'>
-                    <!-- Loop through photos passed from the route -->
-                    <% photosAll.forEach(photo => { %>
-                      <div class="column-main">
-                        <img src="data:image/jpeg;base64,<%= photo.imageBase64 %>" alt="" class="img-fluid">
-                        <div class="name d-none">
-                          <h3><%= photo.title %></h3>
-                          <h4><%= photo.alttitle %></h4>
+            <div class="container home-page-content" id="top">
+                <div id="main-content">
+                <!--<hr class="solid">-->
+                    <div class="row row-category">
+
+                        <div class="full-link">
+                            <h2 id="" class="title-custom">Thư Viện Ảnh</h2>
+                            <div class="full-link-bd">
+                                <a href="/gallery">
+                                    <p>Xem tất cả
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
+                                            <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+                                        </svg>
+                                    </p>
+                                </a>
+                            </div>
                         </div>
-                      </div>
+
+                        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4 column-gallery-main" data-masonry='{"percentPosition": true }'>
+                            <% photosAll.forEach(photo => { %>
+                                <div class="column-main">
+                                    <img src="data:image/jpeg;base64,<%= photo.imageBase64 %>" alt="" class="img-fluid">
+                                    <div class="name d-none">
+                                        <h3><%= photo.title %></h3>
+                                        <h4><%= photo.alttitle %></h4>
+                                    </div>
+                                </div>
+                            <% }) %>
+                        </div>
+                    </div>
+
+                    
+                    <!-- Category Sections -->
+                    <% ['Chim Việt Nam', 'Chim Thế Giới', 'Ảnh đẹp của bạn bè'].forEach(categoryName => { %>
+                        <div class="row row-category">
+                            <div class="full-link">
+                                <h2 id="" class="title-custom"><%= categoryName %></h2>
+                                <div class="full-link-bd">
+                                    <a href="/gallery?category=<%= categoryName %>">
+                                        <p>Xem tất cả
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
+                                                <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+                                            </svg>
+                                        </p>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4 column-gallery-main" data-masonry='{"percentPosition": true }'>
+                                <% photosAll.filter(photo => photo.category === categoryName).forEach(photo => { %>
+                                    <div class="column-main">
+                                        <img src="data:image/jpeg;base64,<%= photo.imageBase64 %>" alt="" class="img-fluid">
+                                        <div class="name d-none">
+                                            <h3><%= photo.title %></h3>
+                                            <h4><%= photo.alttitle %></h4>
+                                        </div>
+                                    </div>
+                                <% }) %>
+                            </div>
+                        </div>
                     <% }) %>
-                  </div>
+
                 </div>
-              </div>
-              
-            
-            
+                
+            </div>        
         </div>
         <!-- Modal -->
         <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
@@ -86,8 +134,8 @@
             </div>
           </div>
         </section>
-            <!--FOOTER-->
-            <%- include('partials/footer') %>
+       <!--FOOTER-->
+       <%- include('partials/footer') %>
         </main>
     </div>
 
@@ -125,6 +173,8 @@
    
      </script>
 
+
+
      <!-- Include Masonry from CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
@@ -145,7 +195,10 @@
    });
  };
  
-     </script>
+    </script>
+
+
+
   
   </body>
 </html>

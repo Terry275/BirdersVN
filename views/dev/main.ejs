@@ -86,7 +86,7 @@
 
                     
                     <!-- Category Sections -->
-                    <% ['Chim Việt Nam', 'Chim Thế Giới'].forEach(categoryName => { %>
+                    <% ['Chim Việt Nam', 'Chim Thế Giới', 'Ảnh đẹp của bạn bè'].forEach(categoryName => { %>
                         <div class="row row-category">
                             <div class="full-link">
                                 <h2 id="" class="title-custom"><%= categoryName %></h2>
@@ -162,20 +162,7 @@
                         </div>
                     </div>
                     
-                    <script>
-                        document.getElementById('toggleButton').addEventListener('click', function() {
-                            var dropdown = document.getElementById('subCategory-dropdown');
-                            var input = document.getElementById('subCategory-input');
-                            
-                            if (dropdown.disabled) {
-                                dropdown.disabled = false;
-                                input.disabled = true;
-                            } else {
-                                dropdown.disabled = true;
-                                input.disabled = false;
-                            }
-                        });
-                    </script>
+                    
                     
 
         <!--

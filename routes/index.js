@@ -15,8 +15,16 @@ router.get('/', async (req, res) => {
       { $group: { _id: '$category', subCategories: { $addToSet: '$subCategory' } } }
     ]);
 
+    // Sort categories and sub-categories
+    categories.sort((a, b) => a._id.localeCompare(b._id));
+    categories.forEach(category => {
+      category.subCategories.sort((a, b) => a.toString().localeCompare(b.toString()));
+    });
+    
+
     const photosVietnam = await Photo.find({ category: 'Chim Việt Nam' }).limit(12);
     const photosWorld = await Photo.find({ category: 'Chim Thế Giới' }).limit(12);
+    const photosFriend = await Photo.find({ category: 'Ảnh đẹp của bạn bè' }).limit(12);
     const photosAll = await Photo.find().limit(12);
 
     const articles = await Article.find();
@@ -25,6 +33,7 @@ router.get('/', async (req, res) => {
       categories, 
       photosVietnam, 
       photosWorld, 
+      photosFriend,
       photosAll, 
       articles, 
       category: null,  // Add category as null or any default value
@@ -37,22 +46,53 @@ router.get('/', async (req, res) => {
 
 // Gallery route
 router.get('/gallery', async (req, res) => {
-  let filter = {};
-  let category = 'All Photos';
-  let subCategory = '';
+  try {
+    // Fetch distinct categories and sub-categories
+    const categories = await Photo.aggregate([
+      {
+        $group: {
+          _id: '$category',
+          subCategories: { $addToSet: '$subCategory' }
+        }
+      }
+    ]);
 
-  if (req.query.category) {
-    filter.category = req.query.category;
-    category = req.query.category;
-  }
-  if (req.query.subCategory) {
-    filter.subCategory = req.query.subCategory;
-    subCategory = req.query.subCategory;
-  }
+    // Sort categories and sub-categories
+    categories.sort((a, b) => a._id.localeCompare(b._id));
+    categories.forEach(category => {
+      category.subCategories.sort((a, b) => a.toString().localeCompare(b.toString()));
+    });
 
-  const photos = await Photo.find(filter);
-  res.render('gallery', { photos, category, subCategory });
+    // Fetch articles for the sidebar
+    const articles = await Article.find();
+
+    // Fetch photos based on query parameters (if any)
+    let filter = {};
+    let selectedCategory = req.query.category || 'All Categories';
+    let selectedSubCategory = req.query.subCategory || '';
+
+    if (req.query.category) {
+      filter.category = req.query.category;
+    }
+    if (req.query.subCategory) {
+      filter.subCategory = req.query.subCategory;
+    }
+
+    const photos = await Photo.find(filter);
+
+    res.render('gallery', {
+      categories,
+      articles,
+      photos,
+      selectedCategory,
+      selectedSubCategory
+    });
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
 });
+
+
 
 
 

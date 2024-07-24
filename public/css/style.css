@@ -6,7 +6,7 @@
 
 
 html {
-  font-size: 62.5%;
+  font-size: 50%;
 }
 
 a, a::before, a::after, a:active {
@@ -136,7 +136,7 @@ p {
   margin: 5px 0px 7px 0px;
 }
 .navbar-brand img {
-  height: 110px;
+  height: 90px;
 }
 .navbar .navbar-toggler {
   position: relative;
@@ -312,6 +312,7 @@ p {
 
   .modal-eng-name {
     opacity: 25%;
+    font-size: 125%;
   }
 
   /* Ensure the navbar appears below the modal */
@@ -321,7 +322,7 @@ p {
 
  .modal-name {
   padding-top: 12px;
-  font-size: 120%;
+  font-size: 150%;
  }
 
 
@@ -437,7 +438,7 @@ p {
 
 #sidebar-side header {
   background-color: #242424;
-  font-size: 20px;
+  font-size: 2rem;
   line-height: 52px;
   text-align: center;
 }
@@ -457,8 +458,8 @@ p {
   /*background: none;*/
   border-bottom: 1px solid #fff;
   color: #000;
-  font-size: 14px;
-  padding: 10px 24px;
+  font-size: 1.9rem;
+  padding: 6px 18px;
 }
 .scrollable-category {
   max-height: 250px;
@@ -487,7 +488,7 @@ p {
 .sidebar-title {
   color: #fff;
   background-color: #242424;
-  padding: 16px 24px;
+  padding: 12px 18px;
   margin-bottom: 0px;  
   text-align: center;
 
@@ -797,7 +798,7 @@ hr.solid {
 
 .title-custom {
   text-align: start;
-  font-size: 30px;
+  font-size: 3rem;
   font-weight:bold;
   padding: 15px 0px 15px 0px;
   color: #16161d;
@@ -983,7 +984,7 @@ hr.solid {
   border-bottom: 1px solid #fff;
   color: #000;
   font-size: 14px;
-  padding: 8px 24px;
+  padding: 8px 18px;
 }
 .scrollable-category {
   max-height: 225px;
@@ -996,7 +997,7 @@ hr.solid {
 .sidebar-title {
   color: #fff;
   background-color: #242424;
-  padding: 12px 24px;
+  padding: 12px 18px;
   margin-bottom: 0px;  
   text-align: center;
   font-size: 18px;

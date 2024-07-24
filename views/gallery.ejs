@@ -11,6 +11,7 @@
 
             <div id="viewport-side">
                 <div id="sidebar-side" class="scrollarea">
+              
                     <% categories.forEach(category => { %>
                         <ul class="nav flex-column">
                             <h3 class="sidebar-title"><%= category._id %></h3>
@@ -29,6 +30,7 @@
                     <!-- Articles Section -->
                     <ul class="nav flex-column" id="mews">
                         <h3 class="sidebar-title">Bài viết</h3>
+                       
                         <div class="scrollable-category" style="display: block !important;">
                             <% articles.forEach(article => { %>
                                 <li class="nav-item">
@@ -41,34 +43,26 @@
                     </ul>
                 </div>
                 
+                
             </div>
             <div class="container" id="top">
                 <div class="row row-category">
-                  <!-- views/gallery.ejs -->
-                    <%- include('partials/header', { title: 'Thư viện ảnh' }) %>
-                    <main>
-                        <div class="container" id="gallery">
-                            <h2><%= category %> <%= subCategory ? '- ' + subCategory : '' %></h2> <!-- Display the selected category and sub-category -->
-                            <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4 column-gallery-main" data-masonry='{"percentPosition": true }'>
-                                <!-- Loop through photos passed from the route -->
-                                <% photos.forEach(photo => { %>
-                                    <div class="column-main">
-                                        <img src="data:image/jpeg;base64,<%= photo.imageBase64 %>" alt="" class="img-fluid">
-                                        <div class="name d-none">
-                                            <h3><%= photo.title %></h3>
-                                            <h4><%= photo.alttitle %></h4>
-                                        </div>
-                                    </div>
-                                <% }) %>
-                            </div>
+                  <h2 class="title-custom"><%= selectedCategory %> <%= selectedSubCategory ? '- ' + selectedSubCategory : '' %></h2> <!-- Display the selected category and sub-category -->
+                  <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4 column-gallery-main" data-masonry='{"percentPosition": true }'>
+                    <!-- Loop through photos passed from the route -->
+                    <% photos.forEach(photo => { %>
+                      <div class="column-main">
+                        <img src="data:image/jpeg;base64,<%= photo.imageBase64 %>" alt="" class="img-fluid">
+                        <div class="name d-none">
+                          <h3><%= photo.title %></h3>
+                          <h4><%= photo.alttitle %></h4>
                         </div>
-                    </main>
-                    <%- include('partials/footer') %>
-
+                      </div>
+                    <% }) %>
+                  </div>
                 </div>
               </div>
-              
-            
+            </div>
             
         </div>
         <!-- Modal -->
